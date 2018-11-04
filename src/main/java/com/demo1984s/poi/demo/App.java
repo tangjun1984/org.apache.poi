@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.net.URL;
 
 public class App {
 
@@ -22,10 +23,14 @@ public class App {
      */
     public static void main(String[] args) {
         String password = "123456";
+        URL url = App.class.getClassLoader().getResource("XSSFWorkbook.xlsx");
+        System.out.println(url.getFile());
         // XSSFWorkbook
-        encryptXSSFWorkbook(new File("XSSFWorkbook.xlsx"), password);
+        encryptXSSFWorkbook(new File(url.getFile()), password);
         // HSSFWorkbook
-        encryptHSSFWorkbook(new File("HSSFWorkbook.xlsx"), password);
+        url = App.class.getClassLoader().getResource("HSSFWorkbook.xls");
+        System.out.println(url.getFile());
+        encryptHSSFWorkbook(new File(url.getFile()), password);
     }
 
     /**
